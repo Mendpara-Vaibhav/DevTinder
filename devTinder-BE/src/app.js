@@ -2,14 +2,20 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-app.use("/", (req, res) => {
-  res.send("Hi Server from main path");
+// this will only handle GET call to /user
+app.get("/user", (req, res) => {
+  res.send({ firstname: "Vaibhav", lastname: "Mendpara" });
 });
 
-app.use("/hello", (req, res) => {
-  res.send("Hello from hello path");
+app.post("/user", (req, res) => {
+  res.send("Data successfully saved to DB");
 });
 
+app.delete("/user", (req, res) => {
+  res.send("Data successfully Deleted");
+});
+
+// this will match all the HTTP method API calls to /test
 app.use("/test", (req, res) => {
   res.send("test from the test path");
 });
