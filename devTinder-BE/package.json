@@ -1,0 +1,21 @@
+{
+  "name": "devtinder-be",
+  "version": "1.0.0",
+  "description": "tinder for devs backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "devTinder",
+    "nodejs",
+    "backend"
+  ],
+  "author": "Mendpara Vaibhav",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
