@@ -2,19 +2,19 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-const { adminAuth, userAuth } = require("./middlewares/auth");
-
-app.use("/admin", adminAuth);
-
-app.get("/user", userAuth, (req, res) => {
-  res.send("User Data send");
+app.get("/getUserData", (req, res) => {
+  try {
+    throw new Error("jsabvdvaeu");
+    res.send("User Data send");
+  } catch {
+    res.status(500).send("Error occur contact support team");
+  }
 });
 
-app.get("/admin/getALLData", (req, res) => {
-  res.send("All Data send");
-});
-app.get("/admin/deleteData", (req, res) => {
-  res.send("All Data Deleted");
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("Something went wrong");
+  }
 });
 
 app.listen(port, () => {
