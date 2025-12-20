@@ -24,7 +24,8 @@ const Connections = () => {
   }, []);
 
   if (!connections) return;
-  if (connections.length === 0) return <h1>No Connection Found</h1>;
+  if (connections.length === 0)
+    return <h1 className="flex justify-center my-10">No Connection Found</h1>;
 
   return (
     <div className="text-center my-10">
@@ -36,7 +37,7 @@ const Connections = () => {
         return (
           <div
             key={_id}
-            className="flex m-4 p-4 bg-base-300 rounded-lg w-1/2 mx-auto"
+            className="flex m-4 p-4 bg-base-300 rounded-lg w-2/3 mx-auto"
           >
             <div>
               <img
@@ -45,7 +46,7 @@ const Connections = () => {
                 src={photoUrl}
               />
             </div>
-            <div className="w-3/4 text-left mx-4">
+            <div className="w-[500px] text-left mx-4">
               <h2 className="font-bold text-xl">
                 {firstName + " " + lastName}
               </h2>
