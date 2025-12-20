@@ -1,42 +1,43 @@
-import { useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addConnections } from "../utils/connectionsSlice";
+import { addRequests } from "../utils/requestSlice";
+import { useEffect } from "react";
 
-const Connections = () => {
-  const connections = useSelector((store) => store.connections);
+const Requests = () => {
+  const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
-  const fetchConnections = async () => {
+  const fetchRequests = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/user/connections", {
+      const res = await axios.get(BASE_URL + "/user/requests/received", {
         withCredentials: true,
       });
-      // console.log(res.data.data);
-      dispatch(addConnections(res.data.data));
+
+      dispatch(addRequests(res.data.data));
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    fetchConnections();
+    fetchRequests();
   }, []);
 
-  if (!connections) return;
-  if (connections.length === 0) return <h1>No Connection Found</h1>;
+  if (!requests) return;
+  if (requests.length === 0) return <h1>No Requests Found</h1>;
 
   return (
     <div className="text-center my-10">
-      <h1 className="text-bold text-white text-3xl">Connections</h1>
+      <h1 className="text-bold text-white text-3xl">Requests</h1>
 
-      {connections.map((connection) => {
+      {requests.map((request) => {
         const { _id, firstName, lastName, photoUrl, age, gender, about } =
-          connection;
+          request.fromUserId;
+
         return (
           <div
             key={_id}
-            className="flex m-4 p-4 bg-base-300 rounded-lg w-1/2 mx-auto"
+            className="flex items-center m-4 p-4 bg-base-300 rounded-lg w-2/3 mx-auto"
           >
             <div>
               <img
@@ -45,12 +46,16 @@ const Connections = () => {
                 src={photoUrl}
               />
             </div>
-            <div className="w-3/4 text-left mx-4">
+            <div className="text-left mx-4 w-[350px]">
               <h2 className="font-bold text-xl">
                 {firstName + " " + lastName}
               </h2>
               {age && gender && <p>{age + ", " + gender}</p>}
               <p className="line-clamp-1">{about}</p>
+            </div>
+            <div>
+              <button className="btn btn-primary mx-2">Reject</button>
+              <button className="btn btn-secondary mx-2">Accept</button>
             </div>
           </div>
         );
@@ -59,4 +64,4 @@ const Connections = () => {
   );
 };
 
-export default Connections;
+export default Requests;
