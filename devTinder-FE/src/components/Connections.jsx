@@ -46,7 +46,7 @@ const Connections = () => {
                 src={photoUrl}
               />
             </div>
-            <div className="w-[500px] text-left mx-4">
+            <div className="w-[800px] text-left mx-4">
               <h2 className="font-bold text-xl">
                 {firstName + " " + lastName}
               </h2>
